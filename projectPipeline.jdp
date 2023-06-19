@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        stage('Pull'){
+            steps {
+                git branch: 'main', url: 'https://github.com/shweta1525/pom.xml.git'
+            }
+        }
+        stage('Build'){
+            steps {
+                sh 'maven clean package'
+            }
+        }
+        stage('Test'){
+            steps {
+                echo 'Test Successful by shweta'
+            }
+        }
+        stage('Deploy'){
+            steps {
+                echo 'Deploy Successful by shweta'
+            }
+        }
+    }
+}
