@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Pull'){
             steps {
-                git 'https://github.com/shubhamkalsait/studentapp-ui.git'
+                git branch: 'main', url: 'https://github.com/shweta1525/pom.xml.git'
             }
         }
         stage('Build'){
@@ -14,7 +14,14 @@ pipeline {
         stage('Test'){
             steps {
                 withSonarQubeEnv('sonar') {
-                     sh 'soanr:soanr'
+                     sh 'mvn sonar:sonar'
+                }
+            }
+        }
+        stage('QualityCheck'){
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate true
                 }
             }
         }
